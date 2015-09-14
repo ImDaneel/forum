@@ -13,11 +13,36 @@
 
 App::before(function ($request) {
 
+    if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        $statusCode = 204;
+
+        $headers = [
+            'Access-Control-Allow-Origin'      => 'http://test.localhost',
+            'Allow'                            => 'POST,GET,OPTIONS,PUT,DELETE',
+            'Access-Control-Allow-Headers'     => 'Content-Type,X-Auth-Token,Orgin',
+            'Access-Control-Allow-Credentials' => 'true'
+        ];
+
+        return Response::make(null, $statusCode, $headers);
+    }
 });
 
 
 App::after(function ($request, $response) {
     //
+    $response->header('Access-Control-Allow-Origin', 'http://test.localhost')
+             ->header('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE')
+             ->header('Access-Control-Allow-Headers', 'Content-Type,X-Auth-Token,Orgin')
+             ->header('Access-Control-Allow-Credentials', 'true');
+
+//    $fp = fopen('/home/vagrant/phphub/app/storage/logs/log', "a+");
+//    $out = date("Y-m-d H:i:s", time()) . ": request is accepted\n";
+//    $out .= $request . "\n";
+//    $out .= $response . "\n";
+//    fputs($fp, $out);
+//    fclose($fp);
+
+    return $response;
 });
 
 /*
@@ -33,7 +58,7 @@ App::after(function ($request, $response) {
 
 Route::filter('auth', function () {
     if (Auth::guest()) {
-        if (Request::ajax())
+        if (Request::ajax() || Request::wantsJson())
         {
             return Response::make('Unauthorized', 401);
         }
@@ -88,7 +113,12 @@ Route::filter('csrf', function () {
 
 Route::filter('manage_topics', function () {
     if (Auth::guest()) {
-        return Redirect::guest('login-required');
+        if (Request::wantsJson())
+        {
+            return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::guest('login-required');
+        }
     } elseif (! Entrust::can('manage_topics')) {
         // Checks the current user
 

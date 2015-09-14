@@ -15,28 +15,27 @@
 
             {{ Form::open() }}
 
-                <div class="form-group">
-                    <label class="control-label" for="name">{{ lang('Avatar') }}</label>
-                    <div class="form-group">
-                        <img src="{{ $githubUser['image_url'] }}" width="100%" />
-                    </div>
-                </div>
-
                 <div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
                     <label class="control-label" for="name">{{ lang('Username') }}</label>
-                    {{ Form::text('name', ($githubUser['name'] ?: ''), ['class' => 'form-control']) }}
+                    {{ Form::text('name', '', ['class' => 'form-control']) }}
                     {{ $errors->first('name', '<span class="help-block">:message</span>') }}
                 </div>
 
-                <div class="form-group {{{ $errors->has('github_name') ? 'has-error' : '' }}}">
-                    <label class="control-label" for="github_name">Github Name</label>
-                    {{ Form::text('github_name', (isset($githubUser['github_name']) ? $githubUser['github_name'] : $githubUser['name']), ['class' => 'form-control', 'readonly'=>'readonly']) }}
-                    {{ $errors->first('github_name', '<span class="help-block">:message</span>') }}
+                <div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
+                    <label class="control-label" for="password">{{ lang('Password') }}</label>
+                    {{ Form::password('password', ['class' => 'form-control']) }}
+                    {{ $errors->first('password', '<span class="help-block">:message</span>') }}
+                </div>
+
+                <div class="form-group {{{ $errors->has('password_confirmation') ? 'has-error' : '' }}}">
+                    <label class="control-label" for="retype_password">{{ lang('Password Confirmation') }}</label>
+                    {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
+                    {{ $errors->first('password_confirmation', '<span class="help-block">:message</span>') }}
                 </div>
 
                 <div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
                     <label class="control-label" for="email">{{ lang('Email') }}</label>
-                    {{ Form::select('email', $githubUser['emails'], $githubUser['email'], ['class' => 'form-control']) }}
+                    {{ Form::text('email', '', ['class' => 'form-control']) }}
                     {{ $errors->first('email', '<span class="help-block">:message</span>') }}
                 </div>
 

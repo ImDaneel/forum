@@ -123,4 +123,45 @@ class UsersController extends \BaseController
 
         return Redirect::route('users.edit', $id);
     }
+
+    public function updateAvatar($id)
+    {
+        $user = User::findOrFail($id);
+        $this->authorOrAdminPermissioinRequire($user->id);
+
+        return View::make('users.update-avatar', compact('user'));
+    }
+
+    public function uploadAvatar($id)
+    {
+        $allowed_extensions = ["png", "jpg", "gif"];
+        $file = Input::file('image');
+
+        if ($file == null || !$file->isValid()) {
+            Flash::error(lang('Operation failed!'));
+
+        } else if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+            Flash::error('You may only upload png, jpg or gif.');
+
+        } else {
+            $user =  User::findOrFail($id);
+
+            $ext = $file->getClientOriginalExtension();
+            $avatar_name = $id . '_' . time() . '.' . $ext;
+            $file->move(public_path('uploads/avatars/'), $avatar_name);
+
+            //Delete old file
+            if ($user->avatar) {
+                @unlink(public_path('uploads/avatars/') . $user->avatar);
+            }
+
+            //Save to database
+            $user->avatar = $avatar_name;
+            $user->save();
+
+            Flash::success(lang('Operation succeeded.'));
+        }
+
+        return Redirect::route('users.edit', $id);
+    }
 }

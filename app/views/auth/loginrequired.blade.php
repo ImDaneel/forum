@@ -19,7 +19,7 @@
               <div class="alert alert-warning">
                   {{ lang('You need to login to proceed.') }}
               </div>
-              {{ Form::submit(trans('Login with Github'), ['class' => 'btn btn-lg btn-success btn-block', 'id' => 'login-required-submit']) }}
+              {{ Form::submit(lang('Login'), ['class' => 'btn btn-lg btn-success btn-block', 'id' => 'login-required-submit']) }}
             </fieldset>
 
           {{ Form::close() }}

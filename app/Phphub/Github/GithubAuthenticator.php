@@ -32,6 +32,18 @@ class GithubAuthenticator
         return $listener->userNotFound($githubData);
     }
 
+    public function authByName(GithubAuthenticatorListener $listener, $data)
+    {
+        $data['password'] = md5($data['password']);
+        $user = $this->userModel->getByNameAndPassword($data['name'], $data['password']);
+
+        if ($user) {
+            return $this->loginUser($listener, $user, NULL);
+        }
+
+        return $listener->userNotFound(NULL);
+    }
+
     private function loginUser($listener, $user, $githubData)
     {
         if ($user->is_banned) {

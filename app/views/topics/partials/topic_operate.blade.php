@@ -4,6 +4,7 @@
     <a class="" href="http://service.weibo.com/share/share.php?url={{ urlencode(Request::url()) }}&type=3&pic=&title={{{ $topic->title }}}" target="_blank" title="{{ lang('Share on Weibo') }}">
       <i class="fa fa-weibo"></i>
     </a>
+    <!--
     <a href="https://twitter.com/intent/tweet?url={{ urlencode(Request::url()) }}&text={{{ $topic->title }}}&via=phphub.org" class=""  target="_blank" title="{{ lang('Share on Twitter') }}">
       <i class="fa fa-twitter"></i>
     </a>
@@ -13,6 +14,7 @@
     <a href="https://plus.google.com/share?url={{ urlencode(Request::url()) }}" class=""  target="_blank" title="{{ lang('Share on Google Plus') }}">
       <i class="fa fa-google-plus"></i>
     </a>
+    -->
   </div>
 
   <div class="pull-right">
@@ -42,9 +44,11 @@
         <i class="fa fa-trophy"></i>
         </a>
 
+        <!--
         <a data-method="post" id="topic-wiki-button" href="javascript:void(0);" data-url="{{ route('topics.wiki', [$topic->id]) }}" class="admin {{ $topic->is_wiki ? 'active' : '' }}" title="{{ lang('Mark as Community Wiki') }}">
         <i class="fa fa-graduation-cap"></i>
         </a>
+        -->
 
         @if ($topic->order >= 0)
           <a data-method="post" id="topic-pin-button" href="javascript:void(0);" data-url="{{ route('topics.pin', [$topic->id]) }}" class="admin {{ $topic->order > 0 ? 'active' : '' }}" title="{{ lang('Pin it on Top') }}">

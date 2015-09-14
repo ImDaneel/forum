@@ -22,7 +22,7 @@ ______                            _              _                              
 
 		<title>
 			@section('title')
-PHPHub  - PHP & Laravel的中文社区
+家庭机器人社区
 			@show
 		</title>
 
@@ -67,6 +67,7 @@ PHPHub  - PHP & Laravel的中文社区
 
 		</div>
 
+          <!--
 	  <div id="footer" class="footer">
 	    <div class="container small">
 	      <p class="pull-left">
@@ -79,6 +80,7 @@ PHPHub  - PHP & Laravel的中文社区
 	      </p>
 	    </div>
 	  </div>
+          -->
 
         <script src="{{ cdn('assets/js/'.Asset::scripts('frontend')) }}"></script>
 

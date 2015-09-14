@@ -30,11 +30,13 @@ class UserCreator
 
     private function createValidUserRecord($observer, $data)
     {
+        unset($data['password_confirmation']);
+        $data['password'] = md5($data['password']);
         $user = User::create($data);
         if (! $user) {
             return $observer->userValidationError($user->getErrors());
         }
-        $user->cacheAvatar();
+        // $user->cacheAvatar();
         return $observer->userCreated($user);
     }
 }

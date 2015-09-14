@@ -5,9 +5,9 @@ use Laracasts\Validation\FormValidator;
 class UserSignupForm extends FormValidator
 {
     protected $rules = [
-        'github_id'   => 'required|unique:users',
-        'github_name' => 'required',
-        'name'        => 'alpha_num|required|unique:users',
-        'email'       => 'email'
+        'name'                  => 'alpha_num|required|unique:users',
+        'password'              => 'required|confirmed',
+        'password_confirmation' => 'required',
+        'email'                 => 'email'
     ];
 }

@@ -19,7 +19,7 @@
       <div class="panel-body ">
 
         <div class="alert alert-warning">
-          {{ lang('avatar_notice') }} {{ link_to_route('users.refresh_cache', lang('Update Cache'), $user->id) }} .
+          {{ lang('avatar_notice') }} {{ link_to_route('users.update_avatar', lang('Update Avatar'), $user->id) }} .
         </div>
 
         @include('layouts.partials.errors')
@@ -38,9 +38,11 @@
             {{ Form::text('company', null, ['class' => 'form-control', 'placeholder' => lang('Company')]) }}
           </div>
 
+          <!--
           <div class="form-group">
             {{ Form::text('twitter_account', null, ['class' => 'form-control', 'placeholder' => lang('twitter_placeholder')]) }}
           </div>
+          -->
 
           <div class="form-group">
             {{ Form::text('personal_website', null, ['class' => 'form-control', 'placeholder' => lang('personal_website_placebolder')]) }}

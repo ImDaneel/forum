@@ -55,6 +55,16 @@ Route::get('/users/{id}/refresh_cache', [
     'uses' => 'UsersController@refreshCache',
 ]);
 
+Route::get('/users/{id}/update_avatar', [
+    'as' => 'users.update_avatar',
+    'uses' => 'UsersController@updateAvatar',
+]);
+
+Route::post('/users/{id}/update_avatar', [
+    'as' => 'users.update_avatar',
+    'uses' => 'UsersController@uploadAvatar',
+]);
+
 Route::post('/favorites/{id}', [
     'as' => 'favorites.createOrDelete',
     'uses' => 'FavoritesController@createOrDelete',
@@ -84,6 +94,11 @@ Route::post('/attentions/{id}', [
 Route::get('login', [
     'as' => 'login',
     'uses' => 'AuthController@login',
+]);
+
+Route::post('login', [
+    'as' => 'login',
+    'uses' => 'AuthController@authenticate',
 ]);
 
 Route::get('login-required', [

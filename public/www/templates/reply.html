@@ -1,0 +1,37 @@
+<ion-view view-title="回帖">
+<!---
+<ion-nav-buttons side="left">
+    <button class="button button-icon ion-ios-arrow-back" ng-click="goBack()"></button>
+</ion-nav-buttons>
+--->
+<ion-content>
+
+<form ng-submit="replyTopic()">
+    <div class="list list-inset">
+      
+        <div class="item item-input" style="height:120px">
+            <textarea style="height:100%" placeholder="内容，10-700个字" ng-model="reply.body" required></textarea>
+        </div>
+        <div class="row">
+            <!--
+            <div class="col">
+                <a class="button button-icon ion-images" ng-click="switchImage()"></a>
+                <a class="button button-icon ion-happy-outline" ng-click="switchImotion()"></a>
+            </div>
+            -->
+            <div class="col col-offset-70">
+                <button class="button button-small button-positive" type="submit">发送</button>
+            </div>
+        </div>
+
+    </div>     
+
+
+   
+</form>
+
+
+</ion-content>
+
+</ion-view>
+

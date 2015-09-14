@@ -21,7 +21,7 @@
               </div>
 
             @if ( ! $currentUser)
-                {{ Form::submit(lang('Login with Github'), ['class' => 'btn btn-lg btn-success btn-block', 'id' => 'login-required-submit']) }}
+                {{ Form::submit(lang('Login'), ['class' => 'btn btn-lg btn-success btn-block', 'id' => 'login-required-submit']) }}
             @endif
 
 

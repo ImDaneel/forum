@@ -1,0 +1,52 @@
+<ion-view view-title={{nodeName}}>
+
+<ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-search"></button>
+</ion-nav-buttons>
+
+<div  class="tabs tabs-icon-left tabs-color-active-positive">
+    <a class="tab-item">
+        <i class="icon ion-android-create" href="#/main/consultmain"></i>
+        发表话题
+    </a>
+</div>
+
+<ion-content>
+    <div class="row">
+        <div class="col col-25">
+        <a class="button button-clear">官方活动</a>
+        </div>
+        <div class="col col-25">
+        <a class="button button-clear">技术达人</a>
+        </div>
+        <div class="col col-25">
+        <a class="button button-clear">业界动态</a>
+        </div>
+        <div class="col col-25">
+        <a class="button button-clear">我要吐槽</a>
+        </div>
+    </div>
+
+    <ion-list>
+        <a class="item item-avatar" ng-repeat="topic in nodeTopics">
+            <img ng-src={{topic.user_avatar}} ></img>
+            <h2 style="overflow : hidden;
+                text-overflow: ellipsis;
+                  display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                      -webkit-box-orient: vertical;"
+                      >{{topic.title}}</h2>
+            <div class="row">
+                <div class="col col-40">
+                    <p><font >{{topic.user_name}}</font></p>
+                </div>
+                <div class="col col-offset-40">
+                    <i class="icon ion-ios-eye"> {{topic.view_count}}</i> <i class="icon ion-chatbox"> {{topic.reply_count}} </i>
+                </div>
+            </div>
+        </a>
+    </ion-list>
+</ion-content>
+
+</ion-view>
+

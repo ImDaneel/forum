@@ -1,0 +1,56 @@
+<ion-view view-title="发帖">
+
+<ion-nav-buttons side="left">
+    <button class="button button-icon ion-ios-arrow-back" ng-click="goBack()"></button>
+</ion-nav-buttons>
+
+<ion-content>
+
+<form ng-submit="postTopic()">
+    <div class="list list-inset">
+        
+        <div class="item item-input">
+            <textarea  placeholder="标题，4-25个字" ng-model="posting.title" required></textarea>
+        </div>
+        
+        <div class="item  item-input item-select" style="height:64px">
+            <div class="input-label">
+                请选择板块</div>
+            <select ng-model="posting.node_id">
+                <option value="47">官方行动</option>
+                <option value="48">技术达人</option>
+                <option value="49">业界动态</option>
+                <option value="50">我要吐槽</option>
+            </select>
+        </div>
+        
+        <!--
+        <div class="item item-divider list-inset item-borderless" style="height:10px"></div>
+        -->
+        
+        <div class="item item-input" style="height:120px">
+            <textarea style="height:100%" placeholder="内容，10-700个字" ng-model="posting.body" required></textarea>
+        </div>
+        <div class="row">
+            <!--
+            <div class="col">
+                <a class="button button-icon ion-images" ng-click="switchImage()"></a>
+                <a class="button button-icon ion-happy-outline" ng-click="switchImotion()"></a>
+            </div>
+            -->
+            <div class="col col-offset-70">
+                <button class="button button-small button-positive" type="submit">发送</button>
+            </div>
+        </div>
+
+    </div>     
+
+
+   
+</form>
+
+
+</ion-content>
+
+</ion-view>
+

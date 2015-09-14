@@ -35,6 +35,7 @@
     </div>
   @endif
 
+  <!--
   @if (Route::currentRouteName() == 'topics.index')
       <div class="panel panel-default corner-radius">
         <div class="panel-heading text-center">
@@ -58,6 +59,7 @@
         </div>
       </div>
   @endif
+  -->
 
   @if (isset($nodeTopics) && count($nodeTopics))
     <div class="panel panel-default corner-radius">
@@ -80,6 +82,7 @@
     </div>
   @endif
 
+  @if (isset($siteTip))
   <div class="panel panel-default corner-radius">
     <div class="panel-heading text-center">
       <h3 class="panel-title">{{ lang('Tips and Tricks') }}</h3>
@@ -88,6 +91,7 @@
       {{ $siteTip->body }}
     </div>
   </div>
+  @endif
 
 
   <div class="panel panel-default corner-radius">

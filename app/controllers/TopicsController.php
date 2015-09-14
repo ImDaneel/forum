@@ -109,6 +109,7 @@ class TopicsController extends \BaseController implements CreatorListener
     {
         $topic = Topic::find($id);
         App::make('Phphub\Vote\Voter')->topicUpVote($topic);
+        Flash::success(lang('Operation succeeded.'));
         return Redirect::route('topics.show', $topic->id);
     }
 
@@ -116,6 +117,7 @@ class TopicsController extends \BaseController implements CreatorListener
     {
         $topic = Topic::find($id);
         App::make('Phphub\Vote\Voter')->topicDownVote($topic);
+        Flash::success(lang('Operation succeeded.'));
         return Redirect::route('topics.show', $topic->id);
     }
 
@@ -219,6 +221,9 @@ class TopicsController extends \BaseController implements CreatorListener
     public function creatorSucceed($topic)
     {
         Flash::success(lang('Operation succeeded.'));
+
+        Session::flash('result_storage.key', 'topic_id');
+        Session::flash('result_storage.value', $topic->id);
 
         return Redirect::route('topics.show', array($topic->id));
     }

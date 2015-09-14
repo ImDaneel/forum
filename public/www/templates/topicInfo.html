@@ -1,0 +1,83 @@
+<ion-view view-title="话题">
+
+<ion-nav-buttons side="left">
+    <button class="button button-icon ion-ios-arrow-back" ng-click="goBack()"></button>
+</ion-nav-buttons>
+
+<div  class="tabs tabs-icon-left tabs-color-active-positive">
+    <a class="tab-item" ng-click="favorite(topic.id)">
+        <i class="icon ion-ios-star"></i>
+        {{topic.favorite_count}}
+    </a>
+    <a class="tab-item" ng-click="upvote(topic.id)">
+        <i class="icon ion-thumbsup"></i>
+        {{topic.vote_count}}
+    </a>
+    <a class="tab-item" ng-click="reply(topic.id)">
+        <i class="icon ion-android-textsms"></i>
+        {{topic.reply_count}}
+    </a>
+</div>
+
+<ion-content>
+    <h2 style="font-size:20px">{{topic.title}}</h2>
+    <!---
+    <div class="item item-avatar">
+        <img ng-src={{topic.user_avatar}}></img>
+        <p>{{topic.user_name}}</p>
+    </div>
+    -->
+    <div class="row row-bottom">
+        <div class="col col-10">
+            <img ng-src={{topic.user_avatar}} style="width:40px; height:40px"></img>
+        </div>
+        <div class="col col-offset-10">
+            <p>{{topic.user_name}}</p>
+        </div>
+    </div>
+    <mytopic-body topicbody={{topic.body}}></mytopic-body>
+    <!--
+    <div class="list">
+        -->
+        <div class="item item-divider">回复({{topic.reply_count}})</div>
+        
+        <div ng-repeat="reply in replies">
+            <div class="row row-bottom">
+                <div class="col col-10">
+                    <img ng-src={{reply.user_avatar}} style="width:40px; height:40px"></img>
+                </div>
+                <div class="col col-offset-10">
+                    <p>{{reply.user_name}}</p>
+                </div>
+            </div>
+<!--
+            <img ng-src={{reply.user_avatar}}></img>
+            <h2>{{reply.user_name}}</h2>
+            -->
+            <topic-body body={{reply.body}}></topic-body>
+            <div class="row">
+                <div class="col col-offset-80">
+                    <a ng-click="votereply(reply.id)"> <i style="font-size:15px" class="icon ion-thumbsup"></i></a>
+                    <a  ng-click="replyreply(reply.id)"> <i style="font-size:15px" class="icon ion-android-textsms"></i></a>
+                </div>
+            </div>
+
+        </div>
+            <!---
+            <div class="row">
+                <div class="col">
+                    <h2>{{reply.user_name}}</h2>
+                </div>
+                <div class="col col-offset-70">
+                    <h2>{{ reply.created_at.date | date : "shortDate" }}</h2>
+                    <p>{{ reply.created_at.date | date : "shortTime" }}</p>
+                </div>
+            </div>
+            -->
+        <!--
+    </div>
+    -->
+</ion-content>
+
+</ion-view>
+

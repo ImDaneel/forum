@@ -16,7 +16,8 @@ class AuthController extends BaseController implements GithubAuthenticatorListen
         }
 
         // redirect to the github authentication url
-        return Redirect::to((string) OAuth::consumer('GitHub')->getAuthorizationUri());
+        // return Redirect::to((string) OAuth::consumer('GitHub')->getAuthorizationUri());
+        return View::make('auth.login');
     }
 
     public function logout()
@@ -36,16 +37,27 @@ class AuthController extends BaseController implements GithubAuthenticatorListen
         return View::make('auth.adminrequired');
     }
 
+    public function authenticate()
+    {
+        $data = Input::only('name', 'password');
+        App::make('Phphub\Forms\UserLoginForm')->validate($data);
+
+        return App::make('Phphub\Github\GithubAuthenticator')->authByName($this, $data);
+    }
+
     /**
      * Shows a user what their new account will look like.
      */
     public function create()
     {
+        /* 
         if (! Session::has('userGithubData')) {
             return Redirect::route('login');
         }
         $githubUser = array_merge(Session::get('userGithubData'), Session::get('_old_input', []));
         return View::make('auth.signupconfirm', compact('githubUser'));
+        */
+        return View::make('auth.signupconfirm');
     }
 
     /**
@@ -53,12 +65,17 @@ class AuthController extends BaseController implements GithubAuthenticatorListen
      */
     public function store()
     {
+        /*
         if (! Session::has('userGithubData')) {
             return Redirect::route('login');
         }
         $githubUser = array_merge(Session::get('userGithubData'), Input::only('name', 'github_name', 'email'));
         unset($githubUser['emails']);
         return App::make('Phphub\Creators\UserCreator')->create($this, $githubUser);
+        */
+
+        $userData = Input::only('name', 'password', 'password_confirmation', 'email');
+        return App::make('Phphub\Creators\UserCreator')->create($this, $userData);
     }
 
     public function userBanned()
@@ -102,8 +119,9 @@ class AuthController extends BaseController implements GithubAuthenticatorListen
     // 数据库找不到用户, 执行新用户注册
     public function userNotFound($githubData)
     {
-        Session::put('userGithubData', $githubData);
-        return Redirect::route('signup');
+        // Session::put('userGithubData', $githubData);
+        // return Redirect::route('signup');
+        return View::make('auth.usernotfound');
     }
 
     // 数据库有用户信息, 登录用户

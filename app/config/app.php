@@ -157,6 +157,7 @@ return array(
         'Phphub\Sitemap\SitemapServiceProvider',
         'Maknz\Slack\SlackServiceProvider',
 
+        'Phphub\Jsons\JsonRedirectServiceProvider',
     ),
 
     /*
@@ -209,7 +210,8 @@ return array(
         'Paginator'         => 'Illuminate\Support\Facades\Paginator',
         'Password'          => 'Illuminate\Support\Facades\Password',
         'Queue'             => 'Illuminate\Support\Facades\Queue',
-        'Redirect'          => 'Illuminate\Support\Facades\Redirect',
+        // 'Redirect'          => 'Illuminate\Support\Facades\Redirect',
+        'Redirect'          => 'Phphub\Facades\Redirect',
         'Redis'             => 'Illuminate\Support\Facades\Redis',
         'Request'           => 'Illuminate\Support\Facades\Request',
         'Response'          => 'Illuminate\Support\Facades\Response',
@@ -222,7 +224,8 @@ return array(
         'Str'               => 'Illuminate\Support\Str',
         'URL'               => 'Illuminate\Support\Facades\URL',
         'Validator'         => 'Illuminate\Support\Facades\Validator',
-        'View'              => 'Illuminate\Support\Facades\View',
+        // 'View'              => 'Illuminate\Support\Facades\View',
+        'View'              => 'Phphub\Facades\View',
 
         'Flash'             => 'Laracasts\Flash\Flash',
         'Carbon'            => 'Carbon\Carbon',

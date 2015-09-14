@@ -7,6 +7,7 @@ use Vote;
 use Carbon;
 use User;
 use Notification;
+use Session;
 
 class Voter
 {
@@ -30,6 +31,9 @@ class Voter
 
             Notification::notify('topic_upvote', Auth::user(), $topic->user, $topic);
         }
+
+        Session::flash('result_storage.key', 'vote_count');
+        Session::flash('result_storage.value', $topic->vote_count);
     }
 
     public function topicDownVote(Topic $topic)
@@ -72,5 +76,8 @@ class Voter
 
             Notification::notify('reply_upvote', Auth::user(), $reply->user, $reply->topic, $reply);
         }
+
+        Session::flash('result_storage.key', 'vote_count');
+        Session::flash('result_storage.value', $reply->vote_count);
     }
 }
