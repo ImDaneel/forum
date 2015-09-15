@@ -2,6 +2,7 @@
 
 use Phphub\Listeners\GithubAuthenticatorListener;
 use User;
+use \Config;
 
 /**
 * This class can call the following methods on the listener object:
@@ -20,22 +21,21 @@ class GithubAuthenticator
         $this->reader = $reader;
     }
 
-    public function authByCode(GithubAuthenticatorListener $listener, $code)
+    public function authByCode(GithubAuthenticatorListener $listener, $data)
     {
-        $githubData = $this->reader->getDataFromCode($code);
-        $user = $this->userModel->getByGithubId($githubData['id']);
+        if ($data['code'] == md5($data['phone'] . Config::get('app.key', ""))) {
+            $githubId = array('github_id' => $data['github_id']);
+            $user = $this->userModel->firstOrCreate($githubId);
 
-        if ($user) {
-            return $this->loginUser($listener, $user, $githubData);
+            return $this->loginUser($listener, $user, null);
         }
 
-        return $listener->userNotFound($githubData);
+        return $listener->userNotFound(null);
     }
 
     public function authByName(GithubAuthenticatorListener $listener, $data)
     {
-        $data['password'] = md5($data['password']);
-        $user = $this->userModel->getByNameAndPassword($data['name'], $data['password']);
+        $user = $this->userModel->getByNameAndPassword($data['name'], md5($data['password']));
 
         if ($user) {
             return $this->loginUser($listener, $user, NULL);

@@ -12,7 +12,7 @@ class AuthController extends BaseController implements GithubAuthenticatorListen
     {
         // Redirect from Github
         if (Input::has('code')) {
-            return App::make('Phphub\Github\GithubAuthenticator')->authByCode($this, Input::get('code'));
+            return App::make('Phphub\Github\GithubAuthenticator')->authByCode($this, Input::all());
         }
 
         // redirect to the github authentication url
@@ -97,6 +97,7 @@ class AuthController extends BaseController implements GithubAuthenticatorListen
 
     public function userValidationError($errors)
     {
+        Flash::error(lang('Operation failed!'));
         return Redirect::to('/');
     }
 
