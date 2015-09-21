@@ -23,8 +23,8 @@ class GithubAuthenticator
 
     public function authByCode(GithubAuthenticatorListener $listener, $data)
     {
-        if ($data['code'] == md5($data['phone'] . Config::get('app.key', ""))) {
-            $githubId = array('github_id' => $data['github_id']);
+        if ($data['code'] == md5($data['name'] . Config::get('app.key', ""))) {
+            $githubId = array('github_id' => $data['id']);
             $user = $this->userModel->firstOrCreate($githubId);
 
             return $this->loginUser($listener, $user, null);
