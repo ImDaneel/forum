@@ -89,6 +89,18 @@ Route::post('/attentions/{id}', [
     'before' => 'auth',
 ]);
 
+Route::get('/users/my-topics', [
+    'as' => 'users.my-topics',
+    'uses' => 'UsersController@topics',
+    'before' => 'auth',
+]);
+
+Route::get('/users/my-favorites', [
+    'as' => 'users.my-favorites',
+    'uses' => 'UsersController@favorites',
+    'before' => 'auth',
+]);
+
 # ------------------ Authentication ------------------------
 
 Route::get('login', [

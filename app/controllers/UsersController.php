@@ -63,17 +63,25 @@ class UsersController extends \BaseController
         return View::make('users.replies', compact('user', 'replies'));
     }
 
-    public function topics($id)
+    public function topics($id = null)
     {
-        $user = User::findOrFail($id);
+        if ($id) {
+            $user = User::findOrFail($id);
+        } else {
+            $user = Auth::user();
+        }
         $topics = Topic::whose($user->id)->recent()->paginate(15);
 
         return View::make('users.topics', compact('user', 'topics'));
     }
 
-    public function favorites($id)
+    public function favorites($id = null)
     {
-        $user = User::findOrFail($id);
+        if ($id) {
+            $user = User::findOrFail($id);
+        } else {
+            $user = Auth::user();
+        }
         $topics = $user->favoriteTopics()->paginate(15);
 
         return View::make('users.favorites', compact('user', 'topics'));
